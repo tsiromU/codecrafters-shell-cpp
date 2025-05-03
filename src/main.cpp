@@ -19,13 +19,14 @@ int main() {
     }
 
     if(input.find_first_of("echo ") == 0){
-      std::cout << execute_command_echo(input.substr(5)) << std::endl;
+      input = input.substr(5);
+      std::cout << execute_command_echo(input) << std::endl;
       continue;
     }
 
     if(input.find_first_of("type ") == 0){
       input = input.substr(5);
-      std::cout << execute_command_type(input.substr(5)) << std::endl;
+      std::cout << execute_command_type(input) << std::endl;
       continue;
     }
     
