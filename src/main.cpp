@@ -13,6 +13,10 @@ int main() {
     if(input == "exit 0"){
       break;
     }
+    if(input.find_first_of("echo ") == 0){
+      std::cout << input.substr(5) << std::endl;
+      continue;
+    }
     std::cout << input << ": command not found" << std::endl;
   }
 }
