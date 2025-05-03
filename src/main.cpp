@@ -50,5 +50,5 @@ std::string execute_command_type(std::string input){
   if(input == "exit"){
     return "exit is a shell builtin";
   }
-  return input + ": command not found";
+  return input + ": not found";
 };
