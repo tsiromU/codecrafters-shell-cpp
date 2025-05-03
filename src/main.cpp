@@ -1,5 +1,9 @@
 #include <iostream>
 
+std::string execute_command_echo(std::string input);
+std::string execute_command_type(std::string input);
+
+
 int main() {
   // Flush after every std::cout / std:cerr
   std::cout << std::unitbuf;
@@ -13,21 +17,37 @@ int main() {
     if(input == "exit 0"){
       break;
     }
+
     if(input.find_first_of("echo ") == 0){
-      std::cout << input.substr(5) << std::endl;
+      std::cout << execute_command_echo(input.substr(5)) << std::endl;
       continue;
     }
+
     if(input.find_first_of("type ") == 0){
       input = input.substr(5);
-      if(input == "echo"){
-        std::cout << "echo is a shell builtin" << std::endl;
-      } else if (input == "exit"){
-        std::cout << "exit is a shell builtin" << std::endl;
-      } else{
-        std::cout << input << ": not found" << std::endl;
-      }
+      std::cout << execute_command_type(input.substr(5)) << std::endl;
       continue;
     }
+    
     std::cout << input << ": command not found" << std::endl;
   }
 }
+
+
+std::string execute_command_echo(std::string input){
+  return input;
+};
+
+
+std::string execute_command_type(std::string input){
+  if(input == "type"){
+    return "type is a shell builtin";
+  }
+  if(input == "echo"){
+    return "echo is a shell builtin";
+  }
+  if(input == "exit"){
+    return "exit is a shell builtin";
+  }
+  return input + ": command not found";
+};
