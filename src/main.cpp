@@ -86,7 +86,7 @@ std::string find_in_path(std::string file){
     while(getline(ss, s, ':')){
         std::filesystem::path path(s + '/' + file);
         if(std::filesystem::exists(path)){
-            if(std::filesystem::is_regular_file(path));
+            if(std::filesystem::is_regular_file(path))
                 return path;
         }
     }
@@ -137,7 +137,7 @@ void execute_command(std::vector<std::string> args){
         execvp(cstr_args[0], cstr_args.data());
     }
 }
-std::string vectorToString(std::vector<std::string>& vec) {
+std::string vector_to_string(std::vector<std::string>& vec) {
     std::ostringstream oss;
     for (size_t i = 0; i < vec.size(); ++i) {
         if (i != 0) {
