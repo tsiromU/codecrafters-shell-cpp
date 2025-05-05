@@ -52,8 +52,10 @@ int main() {
         std::string path = find_in_path(input_vector[0]);
         if(path != ""){
             execute_command(input_vector);
+            continue;
         }
         std::cout << input << ": command not found" << std::endl;
+
     }
 }
 
