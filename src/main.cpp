@@ -50,7 +50,7 @@ int main() {
         }
         
         if(input_vector[0] == "pwd"){
-            std::cout << "Current path is " << std::filesystem::current_path() << std::endl;
+            std::cout << std::filesystem::current_path() << std::endl;
             continue;
         }
 
