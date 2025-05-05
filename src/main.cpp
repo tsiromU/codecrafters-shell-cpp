@@ -79,6 +79,13 @@ void execute_command_cd(std::string input){
     if(input == ""){
         std::cout << "cd: no argument" << std::endl;
     }
+
+    if(input == "~"){
+        std::filesystem::path home_path(getenv("HOME"));
+        std::filesystem::current_path(home_path);
+        return;
+    }
+
     std::filesystem::path path(input);
     if(std::filesystem::exists(path) && std::filesystem::is_directory(path)){
         std::filesystem::current_path(path);
@@ -94,6 +101,8 @@ void execute_command_cd(std::string input){
     std::cout << "cd: " << input << ": No such file or directory" << std::endl;
 };
 
+
+//needs refactoring(array of available commands, so we can get rid of the multiple if statements)
 std::string execute_command_type(std::string input){
     if(input == "type"){
         return "type is a shell builtin";
