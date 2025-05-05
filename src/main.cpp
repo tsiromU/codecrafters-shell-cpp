@@ -49,6 +49,11 @@ int main() {
             continue;
         }
         
+        if(input_vector[0] == "pwd"){
+            std::cout << "Current path is " << std::filesystem::current_path() << std::endl;
+            continue;
+        }
+
         std::string path = find_in_path(input_vector[0]);
         if(path != ""){
             execute_command(input_vector);
@@ -74,6 +79,9 @@ std::string execute_command_type(std::string input){
     if(input == "exit"){
         return "exit is a shell builtin";
     }
+    if(input == "pwd"){
+        return "pwd is a shell builtin";
+    }
     std::string ans = find_in_path(input);
     if(ans != "")
         return ans;
@@ -94,9 +102,7 @@ std::string find_in_path(std::string file){
     }
     return "";
   }
-  
 
-  
 void execute_command(std::string input){
     auto id = fork();
     if(id != 0){
@@ -139,6 +145,7 @@ void execute_command(std::vector<std::string> args){
         execvp(cstr_args[0], cstr_args.data());
     }
 }
+
 std::string vector_to_string(std::vector<std::string>& vec) {
     std::ostringstream oss;
     for (size_t i = 0; i < vec.size(); ++i) {
@@ -149,7 +156,6 @@ std::string vector_to_string(std::vector<std::string>& vec) {
     }
     return oss.str();
 }
-
 std::vector<std::string> string_to_vector(std::string input){
     std::string word;
     std::istringstream iss(input);
