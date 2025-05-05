@@ -7,6 +7,7 @@
 
 std::string execute_command_echo(std::string input);
 std::string execute_command_type(std::string input);
+void execute_command_cd(std::string input);
 
 std::string find_in_path(std::string file);
 
@@ -54,6 +55,11 @@ int main() {
             continue;
         }
 
+        if(input_vector[0] == "cd"){
+            execute_command_cd(input_vector[1]);
+            continue;
+        }
+
         std::string path = find_in_path(input_vector[0]);
         if(path != ""){
             execute_command(input_vector);
@@ -69,6 +75,25 @@ std::string execute_command_echo(std::string input){
     return input;
 };
 
+void execute_command_cd(std::string input){
+    if(input == ""){
+        std::cout << "cd: no argument" << std::endl;
+    }
+    std::filesystem::path path(input);
+    if(std::filesystem::exists(path) && std::filesystem::is_directory(path)){
+        std::filesystem::current_path(path);
+        return;
+    }
+    
+    path = std::filesystem::current_path() / input;
+
+    if(std::filesystem::exists(path) && std::filesystem::is_directory(path)){
+        std::filesystem::current_path(path);
+        return;
+    }
+    std::cout << "cd: " << input << ": No such file or directory" << std::endl;
+};
+
 std::string execute_command_type(std::string input){
     if(input == "type"){
         return "type is a shell builtin";
@@ -82,6 +107,11 @@ std::string execute_command_type(std::string input){
     if(input == "pwd"){
         return "pwd is a shell builtin";
     }
+
+    if(input == "cd"){
+        return "cd is a shell builtin";
+    }
+
     std::string ans = find_in_path(input);
     if(ans != "")
         return ans;
