@@ -104,26 +104,24 @@ void execute_command_cd(std::string input){
 
 //needs refactoring(array of available commands, so we can get rid of the multiple if statements)
 std::string execute_command_type(std::string input){
-    if(input == "type"){
-        return "type is a shell builtin";
-    }
-    if(input == "echo"){
-        return "echo is a shell builtin";
-    }
-    if(input == "exit"){
-        return "exit is a shell builtin";
-    }
-    if(input == "pwd"){
-        return "pwd is a shell builtin";
-    }
 
-    if(input == "cd"){
-        return "cd is a shell builtin";
+    std::vector<std::string> vector_of_commands{
+        "type", "echo", "exit", "pwd", "cd"
+    };
+
+    if(vector_of_commands.size() == 0){
+        return "type: no arguments";
     }
+    for(auto command : vector_of_commands){
+        if(input == command){
+            return command + " is a shell builtin";
+        }
+    }   
 
     std::string ans = find_in_path(input);
     if(ans != "")
         return ans;
+
     return input + ": not found";
 };
 
