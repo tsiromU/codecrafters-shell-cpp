@@ -190,7 +190,7 @@ std::string vector_to_string(std::vector<std::string>& vec) {
         }
         oss << vec[i];
     }
-    return oss.str().erase(0, 1).erase(oss.str().size() - 1, 1);
+    return oss.str().erase(0, 1).erase(oss.str().size() - 2, 1);
 }
 std::vector<std::string> string_to_vector(std::string input){
     std::string word;
