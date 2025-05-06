@@ -102,7 +102,6 @@ void execute_command_cd(std::string input){
 };
 
 
-//needs refactoring(array of available commands, so we can get rid of the multiple if statements)
 std::string execute_command_type(std::string input){
 
     std::vector<std::string> vector_of_commands{
@@ -191,7 +190,7 @@ std::string vector_to_string(std::vector<std::string>& vec) {
         }
         oss << vec[i];
     }
-    return oss.str();
+    return oss.str().erase(0, 1).erase(oss.str().size() - 1, 1);
 }
 std::vector<std::string> string_to_vector(std::string input){
     std::string word;
